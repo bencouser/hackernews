@@ -1,0 +1,4 @@
+Requirements
+
+It would be cool to try to make a model that trys to make
+a model that makes a title to optimise the score metric
