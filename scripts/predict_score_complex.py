@@ -42,15 +42,24 @@ model_2 = Sequential(
         Conv1D(64, 5, activation="relu"),
         Bidirectional(LSTM(64, return_sequences=True)),
         GlobalMaxPooling1D(),
+        Dense(128, activation="relu"),
+        Dropout(0.2),
         Dense(64, activation="relu"),
+        Dropout(0.2),
+        Dense(32, activation="relu"),
         Dropout(0.2),
         Dense(1),
     ]
 )
 
+# Print the model summary
+print(model_2.summary())
+
 # Compile the model
 model_2.compile(
-    optimizer="adam", loss="mean_squared_error", metrics=["mean_absolute_error"]
+    optimizer=tf.keras.optimizers.legacy.Adam(learning_rate=0.001),
+    loss="mean_squared_error",
+    metrics=["mean_absolute_error"],
 )
 
 # Train the model
@@ -61,9 +70,20 @@ evaluation = model_2.evaluate(X_val, y_val)
 print("Evaluation:", evaluation)
 
 # Make a prediction
-test_title = ["apple is releasing a new product"]
-test_seq = tokenizer.texts_to_sequences(test_title)
+test_titles = [
+    "apple is releasing a new product",  # Quessing high scorer
+    "how to join a sql table",  # Quessing low scorer
+    "quitting vim is hard",  # Quessing high score
+    "what is a cpu",  # No idea
+    "doubts grow about the biosignature approach to alienhunting",
+]
+test_seq = tokenizer.texts_to_sequences(test_titles)
 test_pad = pad_sequences(test_seq, maxlen=20)
 predicted_score = model_2.predict(test_pad)
 
-print("Predicted Score:", predicted_score)
+for i, title in enumerate(test_titles):
+    print("Test Title:", title)
+    print("Predicted Score:", predicted_score[i])
+
+# Save the model
+model_2.save("../models/predict_score_complex")

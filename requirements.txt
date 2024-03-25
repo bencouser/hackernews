@@ -1,4 +1,13 @@
 Requirements
 
-It would be cool to try to make a model that trys to make
-a model that makes a title to optimise the score metric
+
+> Get More Data []
+    - https://www.kaggle.com/datasets/hacker>news/hacker>news/data
+    - that a lot of data and most of it I dont need (low/nil score)
+    - Query api for scores over x?
+
+> Make a model to accurately predict score from title []
+
+> Make a model to generate titles []
+
+> Make ^ model generate models optimised for ^^ model []

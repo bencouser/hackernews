@@ -1,0 +1,14 @@
+Complex Model Tests
+
+Test Title: apple is releasing a new product
+Predicted Score: [241.674]
+Test Title: how to join a sql table
+Predicted Score: [302.9986]
+Test Title: quitting vim is hard
+Predicted Score: [326.1843]
+Test Title: what is a cpu
+Predicted Score: [241.2323]
+Test Title: doubts grow about the biosignature approach to alienhunting
+Predicted Score: [-2.4876692]
+
+--- Note that the final test was part of the training data.
