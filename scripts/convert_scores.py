@@ -1,14 +1,14 @@
 import pandas as pd
 
 
-def main():
-    df = pd.read_csv("../data/processed/top_hacker_news_stories.csv")
+def main(file_path="../data/processed/joined_data_clean_titles.csv"):
+    df = pd.read_csv(file_path)
     # Convert scores to floats
     df["score"] = df["score"].astype(float)
     # Print head
     print(df.head())
     # Save cleaned data
-    df.to_csv("../data/processed/top_hacker_news_stories.csv", index=False)
+    df.to_csv(file_path)
 
 
 if __name__ == "__main__":

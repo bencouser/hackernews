@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Load the data
-data = pd.read_csv("../data/raw/top_hacker_news_stories.csv")
+data = pd.read_csv("../data/raw/joined_data.csv")
 
 
 # Display the shape of the data
@@ -27,6 +27,12 @@ print("Most common words:", word_counts.head(10))
 print("Show HN Titles:", data["title"].str.contains("Show HN").sum())
 print("Ask HN Titles:", data["title"].str.contains("Ask HN").sum())
 print("Launch HN Titles:", data["title"].str.contains("Launch HN").sum())
+
+
+# Find max and min title lengths
+title_lengths = data["title"].str.len()
+print("Max title length:", title_lengths.max())
+print("Min title length:", title_lengths.min())
 
 
 # Show max, min, average, and median scores

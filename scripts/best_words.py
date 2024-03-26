@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-def load_data(file_path="../data/processed/top_hacker_news_stories.csv"):
+def load_data(file_path="../data/processed/joined_data_clean_titles.csv"):
     # Load the data
     data = pd.read_csv(file_path)
     return data

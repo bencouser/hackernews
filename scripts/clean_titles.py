@@ -1,8 +1,8 @@
 import pandas as pd
 
 
-def main():
-    df = pd.read_csv("../data/raw/top_hacker_news_stories.csv")
+def main(file_path="../data/raw/joined_data.csv"):
+    df = pd.read_csv(file_path)
     # Drop null values
     df = df.dropna()
     # Drop duplicates
@@ -14,7 +14,7 @@ def main():
     # Print head
     print(df.head())
     # Save cleaned data
-    df.to_csv("../data/processed/top_hacker_news_stories.csv", index=False)
+    df.to_csv("../data/processed/joined_data_clean_titles.csv", index=False)
 
 
 if __name__ == "__main__":
