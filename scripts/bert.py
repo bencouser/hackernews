@@ -1,5 +1,5 @@
-import numpy as np
 import pandas as pd
+import tensorflow as tf
 from transformers import BertTokenizer, TFBertForSequenceClassification
 
 
@@ -28,13 +28,38 @@ def encode_titles(titles, tokenizer, max_length=128):
 
 
 def main():
+    # Get Data
     df = load_data()
-    model, tokenizer = load_model()
+
+    # Load Model and tokenize
+    berty, tokenizer = load_model()
     encoded_titles = encode_titles(df["title"].values, tokenizer)
-    # Print first 5 encoded titles wth inputs
-    for i in range(5):
-        print(df["title"].values[i])
-        print(encoded_titles["input_ids"][i])
+
+    # Sort Bert out
+    optimizer = tf.keras.optimizers.legacy.Adam(learning_rate=5e-5)
+    loss = tf.keras.losses.MeanSquaredError()
+    metrics = [
+        tf.keras.metrics.MeanSquaredError(),
+        tf.keras.metrics.MeanAbsoluteError(),
+    ]
+    berty.compile(optimizer=optimizer, loss=loss, metrics=metrics)
+    print(berty.summary())
+
+    # Training
+    history_berty = berty.fit(encoded_titles, df["score"], epochs=10, batch_size=16)
+
+    # Save Model
+    berty.save("../models/berty_v1")
+
+    # Evaluation
+    evaluation = berty.evaluate(encoded_titles, df["score"])
+
+    # Prediction
+    test_titles = ["uber for dogs", "apple new chip"]
+    for title in test_titles:
+        encoded_title = encode_titles([title], tokenizer)
+        prediction = berty.predict(encoded_title)
+        print(f"Title: {title}, Prediction: {prediction}")
 
 
 if __name__ == "__main__":
