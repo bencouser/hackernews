@@ -3,12 +3,6 @@ from datetime import datetime
 
 import requests
 
-filename = (
-    "../data/raw/top_hacker_news_stories"
-    + datetime.now().strftime("%d-%m-%Y %H:%M:%S")
-    + ".csv"
-)
-
 
 def get_top_stories(limit=10):
     # Hacker News API endpoint for top stories
@@ -74,5 +68,5 @@ filename = (
     + datetime.now().strftime("%d-%m-%Y %H:%M:%S")
     + ".csv"
 )
-save_stories_to_csv(top_stories)
+save_stories_to_csv(top_stories, filename=filename)
 print(f"Saved {len(top_stories)} stories to CSV.")
