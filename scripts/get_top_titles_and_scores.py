@@ -1,6 +1,13 @@
 import csv
+from datetime import datetime
 
 import requests
+
+filename = (
+    "../data/raw/top_hacker_news_stories"
+    + datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+    + ".csv"
+)
 
 
 def get_top_stories(limit=10):
@@ -13,8 +20,7 @@ def get_top_stories(limit=10):
         top_stories_ids = response.json()[:limit]
         return top_stories_ids
     else:
-        print(
-            f"Failed to fetch top stories. Status code: {response.status_code}")
+        print(f"Failed to fetch top stories. Status code: {response.status_code}")
         return []
 
 
@@ -62,5 +68,11 @@ for story_id in top_stories_ids:
     if story_details:
         top_stories.append(story_details)
 
+# Use todays timestamp to create a unique filename
+filename = (
+    "../data/raw/top_hacker_news_stories"
+    + datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+    + ".csv"
+)
 save_stories_to_csv(top_stories)
 print(f"Saved {len(top_stories)} stories to CSV.")
