@@ -7,6 +7,8 @@ Requirements
     - Query api for scores over x?
 
 > Make a model to accurately predict score from title []
+    - Try optimizing using just small amount of data first
+    - If not possible, get more data
 
 > Make a model to generate titles []
 
