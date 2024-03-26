@@ -52,21 +52,22 @@ def save_stories_to_csv(stories, filename="../data/raw/top_hacker_news_stories.c
             writer.writerow(story)
 
 
-# Main code execution
-# You can adjust the limit as needed
-top_stories_ids = get_top_stories(limit=2000)
-top_stories = []
+if __name__ == "__main__":
+    # Main code execution
+    # You can adjust the limit as needed
+    top_stories_ids = get_top_stories(limit=2000)
+    top_stories = []
 
-for story_id in top_stories_ids:
-    story_details = get_story_details(story_id)
-    if story_details:
-        top_stories.append(story_details)
+    for story_id in top_stories_ids:
+        story_details = get_story_details(story_id)
+        if story_details:
+            top_stories.append(story_details)
 
-# Use todays timestamp to create a unique filename
-filename = (
-    "../data/raw/top_hacker_news_stories"
-    + datetime.now().strftime("%d-%m-%Y %H:%M:%S")
-    + ".csv"
-)
-save_stories_to_csv(top_stories, filename=filename)
-print(f"Saved {len(top_stories)} stories to CSV.")
+    # Use todays timestamp to create a unique filename
+    filename = (
+        "../data/raw/top_hacker_news_stories"
+        + datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+        + ".csv"
+    )
+    save_stories_to_csv(top_stories, filename=filename)
+    print(f"Saved {len(top_stories)} stories to CSV.")

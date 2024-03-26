@@ -1,7 +1,10 @@
 import pandas as pd
 
-# Load the data
-data = pd.read_csv("../data/processed/top_hacker_news_stories.csv")
+
+def load_data(file_path="../data/processed/top_hacker_news_stories.csv"):
+    # Load the data
+    data = pd.read_csv(file_path)
+    return data
 
 
 # Get words with highest score
@@ -17,13 +20,18 @@ def get_best_words(data):
     return best_words
 
 
-best_words = get_best_words(data)
+if __name__ == "__main__":
+    # Load the data
+    data = load_data()
 
+    # Get the best words
+    best_words = get_best_words(data)
 
-# Sort the dictionary by value
-best_words = dict(sorted(best_words.items(), key=lambda item: item[1], reverse=True))
+    # Sort the dictionary by value
+    best_words = dict(
+        sorted(best_words.items(), key=lambda item: item[1], reverse=True)
+    )
 
-
-# Print best 30 words
-print("Best Scoring 30 words:")
-print(list(best_words.keys())[:30])
+    # Print best 30 words
+    print("Best Scoring 30 words:")
+    print(list(best_words.keys())[:30])
