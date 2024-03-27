@@ -1,3 +1,4 @@
+import keras
 import pandas as pd
 import tensorflow as tf
 from transformers import BertTokenizer, TFBertForSequenceClassification
@@ -31,13 +32,16 @@ def main():
     # Get Data
     df = load_data()
 
+    # Set random seed
+    tf.random.set_seed(69)
+
     # Load Model and tokenize
     berty, tokenizer = load_model()
     encoded_titles = encode_titles(df["title"].values, tokenizer)
 
     # Sort Bert out
     optimizer = tf.keras.optimizers.legacy.Adam(learning_rate=5e-5)
-    loss = tf.keras.losses.MeanSquaredError()
+    loss = keras.losses.MeanSquaredError()
     metrics = [
         tf.keras.metrics.MeanSquaredError(),
         tf.keras.metrics.MeanAbsoluteError(),
