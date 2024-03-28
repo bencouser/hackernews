@@ -50,10 +50,10 @@ def main():
     print(berty.summary())
 
     # Training
-    history_berty = berty.fit(encoded_titles, df["score"], epochs=10, batch_size=16)
+    history_berty = berty.fit(encoded_titles, df["score"], epochs=16, batch_size=8)
 
     # Save Model
-    berty.save("../models/berty_v1")
+    berty.save("../models/berty_v2")
 
     # Evaluation
     evaluation = berty.evaluate(encoded_titles, df["score"])
