@@ -2,9 +2,10 @@ import csv
 from datetime import datetime
 
 import requests
+from tqdm import tqdm
 
 
-def get_top_stories(limit=10):
+def get_top_stories(limit=500):
     # Hacker News API endpoint for top stories
     top_stories_url = "https://hacker-news.firebaseio.com/v0/topstories.json"
     response = requests.get(top_stories_url)
@@ -55,10 +56,10 @@ def save_stories_to_csv(stories, filename="../data/raw/top_hacker_news_stories.c
 if __name__ == "__main__":
     # Main code execution
     # You can adjust the limit as needed
-    top_stories_ids = get_top_stories(limit=2000)
+    top_stories_ids = get_top_stories(limit=500)
     top_stories = []
 
-    for story_id in top_stories_ids:
+    for story_id in tqdm(top_stories_ids, desc="Fetching Stories", unit="story"):
         story_details = get_story_details(story_id)
         if story_details:
             top_stories.append(story_details)

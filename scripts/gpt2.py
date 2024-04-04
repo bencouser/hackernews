@@ -1,5 +1,6 @@
 import tensorflow as tf
 from transformers import GPT2Tokenizer, TFGPT2LMHeadModel
+import sys
 
 
 def load_model():
@@ -10,8 +11,7 @@ def load_model():
     return model, tokenizer
 
 
-def main():
-    input_text = "Apple chips are rubbish"
+def main(input_text: str):
     model, tokenizer = load_model()
     input_ids = tokenizer.encode(input_text, return_tensors="tf")
     output = model.generate(
@@ -28,4 +28,14 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    # Get argument
+    # if len(sys.argv) != 1:
+    #     print("Usage: python gpt2.py <input_text>")
+    #     sys.exit(1)
+    # else:
+    #     input_text = sys.argv[0]
+    input_text = sys.argv[0]
+    input_text = str(input_text)
+    print("input_text: ", input_text)
+
+    main(input_text)
